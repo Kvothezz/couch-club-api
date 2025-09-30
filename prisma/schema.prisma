@@ -1,0 +1,40 @@
+// BD config
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // Diz ao Prisma para pegar a URL do banco do arquivo .env
+}
+
+//Client config
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String   @id @default(uuid()) // A chave primária, gerada automaticamente
+  email     String   @unique             // O email, que não pode se repetir
+  name      String
+  password  String                       // O hash da senha
+
+  lists     List[]                       // RELACIONAMENTO: Um usuário pode ter VÁRIAS listas
+}
+
+// Modelo para a tabela de Listas (ex: "Quero Assistir")
+model List {
+  id        String   @id @default(uuid())
+  name      String
+
+  user      User     @relation(fields: [userId], references: [id]) // RELACIONAMENTO: Diz que esta lista pertence a UM usuário
+  userId    String                       // A "chave estrangeira" que conecta esta lista ao ID do usuário
+
+  movies    Movie[]                      // RELACIONAMENTO: Uma lista pode ter VÁRIOS filmes
+}
+
+// Modelo para a tabela de Filmes dentro de uma Lista
+model Movie {
+  id        String   @id @default(uuid())
+  tmdbId    Int                          // O ID do filme que vem da API do TMDB
+  addedAt   DateTime @default(now())     // A data que o filme foi adicionado
+
+  list      List     @relation(fields: [listId], references: [id]) // RELACIONAMENTO: Diz que este item de filme pertence a UMA lista
+  listId    String                       // A "chave estrangeira" que conecta este item à lista
+}
