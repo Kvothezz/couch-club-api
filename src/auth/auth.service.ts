@@ -1,4 +1,4 @@
-import { NotFoundException, Injectable, UnauthorizedException, ConflictException, BadRequestException } from '@nestjs/common';
+import { NotFoundException, Injectable, UnauthorizedException, ConflictException, BadRequestException, HttpException, InternalServerErrorException } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
@@ -103,4 +103,36 @@ export class AuthService {
 
     }
 
+    async resetPassword(token: string, newPassword: string) {
+        try {
+            const decoded = this.jwtService.verify(token);
+
+            if (decoded.purpose !== 'reset-password') {
+                throw new BadRequestException('Invalid token purpose');
+            }
+
+            const user = await this.usersService.findOneById(decoded.sub);
+
+            if(!user){
+                throw new NotFoundException('User not found');
+            }
+            
+            await this.usersService.update(user.id, { password: newPassword });
+            return { message: 'Password reset successfully' };
+
+            } catch (error) {
+            
+            if (error instanceof HttpException) {
+                throw error; 
+            }
+
+            if (error.name === 'TokenExpiredError' || error.name === 'JsonWebTokenError') {
+                throw new BadRequestException('Invalid or expired token');
+            }
+
+            console.error('Erro crítico no resetPassword:', error);
+            throw new InternalServerErrorException('An unexpected error occurred');
+
+        }   
+    }
 }
