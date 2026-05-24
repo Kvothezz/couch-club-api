@@ -1,98 +1,113 @@
+# Couch Club API
+
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+  <img src="https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS" />
+  <img src="https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white" alt="Prisma" />
+  <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=black" alt="Swagger" />
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+---
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 📖 Sobre o Projeto
 
-## Description
+O **Couch Club** é uma API robusta desenvolvida para facilitar a escolha de filmes entre amigos. O "problema do que assistir" acaba aqui! A API permite que usuários criem listas de filmes e utilizem um sistema de **Matchmaking** para encontrar títulos em comum com outros usuários em tempo real.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Este projeto foi construído utilizando **NestJS** para uma arquitetura escalável, **Prisma ORM** para comunicação eficiente com o banco de dados e **Swagger** para uma documentação de endpoints interativa.
 
-## Project setup
+## 🚀 Funcionalidades Principais
 
-```bash
-$ npm install
-```
+- 🔐 **Autenticação Segura**: Registro, Login (JWT), Troca de senha e Recuperação de senha.
+- 🎬 **Gestão de Listas**: Crie sua lista personalizada de filmes utilizando IDs do TMDB.
+- 🤝 **Matchmaking System**:
+  - Crie sessões de match com códigos únicos.
+  - Entre em sessões de amigos.
+  - Descubra filmes que ambos querem assistir.
+- 📄 **Documentação Automática**: Interface Swagger integrada para teste de rotas.
 
-## Compile and run the project
+## 🛠️ Tecnologias Utilizadas
 
-```bash
-# development
-$ npm run start
+- **Framework**: [NestJS](https://nestjs.com/)
+- **ORM**: [Prisma](https://www.prisma.io/)
+- **Banco de Dados**: PostgreSQL
+- **Linguagem**: TypeScript
+- **Segurança**: Passport.js, JWT, Bcrypt
+- **Documentação**: Swagger UI
 
-# watch mode
-$ npm run start:dev
+---
 
-# production mode
-$ npm run start:prod
-```
+## 🏗️ Como Rodar o Projeto
 
-## Run tests
+### Pré-requisitos
 
-```bash
-# unit tests
-$ npm run test
+- Node.js (v18 ou superior)
+- Docker (opcional, para o banco de dados)
+- Conta no [TMDB](https://www.themoviedb.org/documentation/api) (para pegar os IDs dos filmes)
 
-# e2e tests
-$ npm run test:e2e
+### Passo a Passo
 
-# test coverage
-$ npm run test:cov
-```
+1.  **Clone o repositório**
+    ```bash
+    git clone https://github.com/Kvothezz/couch-club-api.git
+    cd couch-club-api
+    ```
 
-## Deployment
+2.  **Instale as dependências**
+    ```bash
+    npm install
+    ```
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+3.  **Configure as variáveis de ambiente**
+    Crie um arquivo `.env` na raiz do projeto seguindo o modelo:
+    ```env
+    DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=public"
+    JWT_SECRET="sua_chave_secreta_aqui"
+    ```
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+4.  **Rode as Migrations do Prisma**
+    ```bash
+    npx prisma migrate dev
+    ```
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
+5.  **Inicie o servidor**
+    ```bash
+    # Desenvolvimento
+    npm run start:dev
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+    # Produção
+    npm run build
+    npm run start:prod
+    ```
 
-## Resources
+---
 
-Check out a few resources that may come in handy when working with NestJS:
+## 📑 Documentação da API (Swagger)
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Com a aplicação rodando, acesse a documentação interativa através do link:
 
-## Support
+👉 [http://localhost:3000/api/docs](http://localhost:3000/api/docs)
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Lá você encontrará todos os detalhes de cada endpoint, schemas de entrada/saída e poderá realizar testes diretamente pelo navegador.
 
-## Stay in touch
+---
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## 🔗 Endpoints Principais
 
-## License
+| Método | Rota | Descrição |
+|---|---|---|
+| `POST` | `/auth/register` | Cadastro de novo usuário |
+| `POST` | `/auth/login` | Autenticação e geração de token |
+| `POST` | `/match/create` | Cria uma nova sessão de matchmaking |
+| `POST` | `/match/join/:code` | Entra em uma sessão existente |
+| `GET` | `/lists/my-lists` | Retorna as listas do usuário logado |
+| `POST` | `/lists/add-movie` | Adiciona um filme à lista |
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+---
+
+## 👤 Autor
+
+**Kvothezz** - [GitHub](https://github.com/Kvothezz)
+
+---
+<p align="center">Feito com ❤️ por um entusiasta de cinema.</p>
