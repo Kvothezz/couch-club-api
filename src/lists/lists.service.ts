@@ -1,5 +1,5 @@
 import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { AddMovieDto } from './dto/add-movie.dto';
 import { RemoveMovieDto } from './dto/remove-movie.dto';
 
