@@ -1,8 +1,8 @@
 import { NotFoundException, Injectable, UnauthorizedException, ConflictException, BadRequestException, HttpException, InternalServerErrorException } from '@nestjs/common';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { CreateUserDto } from '../users/dto/create-user.dto';
 import { JwtPayload, ValidatedUser } from './interfaces/auth.interfaces';
 import { ChangePasswordDto } from './dtos/changePasswordDto';
 
@@ -126,7 +126,7 @@ export class AuthService {
                 throw error; 
             }
 
-            if (error.name === 'TokenExpiredError' || error.name === 'JsonWebTokenError') {
+            if (error instanceof Error && (error.name === 'TokenExpiredError' || error.name === 'JsonWebTokenError')) {
                 throw new BadRequestException('Invalid or expired token');
             }
 

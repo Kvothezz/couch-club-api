@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { ListsService } from 'src/lists/lists.service';
+import { ListsService } from '../lists/lists.service';
 
 interface MatchData {
   directMatches: number[];
